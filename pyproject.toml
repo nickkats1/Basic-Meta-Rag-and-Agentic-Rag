@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sec-rag"
+version = "0.2.0"
+description = "Multi-strategy Retrieval-Augmented Generation toolkit for SEC filings"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Nick K." }]
+keywords = ["rag", "retrieval", "sec", "huggingface", "bm25", "faiss"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "faiss-cpu",
+    "huggingface_hub",
+    "langchain-community",
+    "langchain-core",
+    "langchain-google-genai",
+    "langchain-groq",
+    "langchain-openai",
+    "langchain-text-splitters",
+    "numpy",
+    "pypdf",
+    "python-dotenv",
+    "rank_bm25",
+    "scikit-learn",
+    "sentence-transformers",
+    "transformers",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "matplotlib", "jupyter", "nbconvert"]
+
+[project.scripts]
+sec-rag = "rag.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/nickkats1/Sec-Rag"
+
+[tool.setuptools.packages.find]
+include = ["rag*"]
+exclude = ["tests*", "notebooks*", "data*", "venv*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-q"
