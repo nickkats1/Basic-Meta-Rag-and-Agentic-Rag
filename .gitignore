@@ -64,6 +64,6 @@ Desktop.ini
 
 
 *.ini.bak
-*.inidata/
-data/
+
+# Local data (large PDFs)
 data/

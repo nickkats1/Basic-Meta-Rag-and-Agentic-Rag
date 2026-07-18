@@ -22,34 +22,39 @@ classifiers = [
 ]
 dependencies = [
     "faiss-cpu",
-    "huggingface_hub",
-    "langchain-community",
-    "langchain-core",
-    "langchain-google-genai",
-    "langchain-groq",
-    "langchain-openai",
-    "langchain-text-splitters",
     "numpy",
     "pypdf",
     "python-dotenv",
     "rank_bm25",
-    "scikit-learn",
     "sentence-transformers",
     "transformers",
+    "langchain-openai",
+    "langchain-groq",
+    "langchain-google-genai",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "matplotlib", "jupyter", "nbconvert"]
+dev = ["pytest", "matplotlib", "jupyter", "nbconvert", "mypy", "ruff"]
 
 [project.scripts]
-sec-rag = "rag.cli:main"
+sec-rag = "cli:main"
 
 [project.urls]
 Homepage = "https://github.com/nickkats1/Sec-Rag"
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+
 [tool.setuptools.packages.find]
-include = ["rag*"]
-exclude = ["tests*", "notebooks*", "data*", "venv*"]
+where = ["src"]
+
+[tool.mypy]
+files = ["src", "tests"]
+exclude = ["venv"]
+
+[[tool.mypy.overrides]]
+module = ["rank_bm25", "faiss"]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
